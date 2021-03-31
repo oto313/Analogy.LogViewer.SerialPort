@@ -16,7 +16,7 @@
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
 		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
-		<Version>1.0.1</Version>
+		<Version>1.0.2</Version>
 		<Authors>Oto Dusek</Authors>
 		<OutputType>Library</OutputType>
 		<Description>Serial port Real Time Receiver for Analogy Log Viewer</Description>

@@ -96,7 +96,7 @@ namespace Analogy.LogViewer.SerialPort
             this.comboBoxSerialPort.Name = "comboBoxSerialPort";
             this.comboBoxSerialPort.Size = new System.Drawing.Size(389, 21);
             this.comboBoxSerialPort.TabIndex = 6;
-            this.comboBoxSerialPort.SelectedIndexChanged += new System.EventHandler(this.spChanged);
+            this.comboBoxSerialPort.SelectedValueChanged += new System.EventHandler(this.spChanged);
             // 
             // SerialPortUserSettingsUC
             // 

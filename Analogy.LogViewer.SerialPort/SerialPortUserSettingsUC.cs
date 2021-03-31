@@ -14,8 +14,8 @@ namespace Analogy.LogViewer.SerialPort
 
         private void SerialPortUserSettingsUC_Load(object sender, EventArgs e) {
             var ports = System.IO.Ports.SerialPort.GetPortNames();
-            comboBoxSerialPort.DataSource = ports;
             var selectedPort = string.IsNullOrEmpty(UserSettingsManager.UserSettings.Settings.SerialPort) ? ports.FirstOrDefault() : UserSettingsManager.UserSettings.Settings.SerialPort;
+            comboBoxSerialPort.DataSource = ports;
             comboBoxSerialPort.SelectedIndex = comboBoxSerialPort.FindStringExact(selectedPort);
             txtbSerialPortBaudrate.Text = UserSettingsManager.UserSettings.Settings.Baudrate.ToString();
             txbRegex.Text = string.IsNullOrEmpty(UserSettingsManager.UserSettings.Settings.Regex) ? @"^(?<time>\d*)\|(?<level>\w*)\|(?<file>[^:]*):(?<line>\d*)\|(?<text>.*)$" : UserSettingsManager.UserSettings.Settings.Regex;
@@ -38,7 +38,10 @@ namespace Analogy.LogViewer.SerialPort
 
         private void spChanged(object sender, EventArgs e)
         {
-            UserSettingsManager.UserSettings.Settings.SerialPort = comboBoxSerialPort.SelectedText;
+            if (!string.IsNullOrEmpty(comboBoxSerialPort.SelectedItem.ToString())) {
+                UserSettingsManager.UserSettings.Settings.SerialPort = comboBoxSerialPort.SelectedItem.ToString();
+            }
+           
         }
     }
 }
