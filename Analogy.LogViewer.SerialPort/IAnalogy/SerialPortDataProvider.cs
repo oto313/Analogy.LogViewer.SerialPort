@@ -1,9 +1,9 @@
-﻿using Analogy.Interfaces;
-using Analogy.LogViewer.Template;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Analogy.Interfaces;
+using Analogy.LogViewer.Template;
 
-namespace Analogy.LogViewer.gRPC.IAnalogy
+namespace Analogy.LogViewer.SerialPort.IAnalogy
 {
     public class SerialPortDataProvider : DataProvidersFactory
     {

@@ -1,10 +1,10 @@
-﻿using Analogy.LogViewer.gRPC.Managers;
-using Analogy.LogViewer.Template;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Analogy.LogViewer.SerialPort.Managers;
+using Analogy.LogViewer.Template;
 
-namespace Analogy.LogViewer.gRPC.IAnalogy
+namespace Analogy.LogViewer.SerialPort.IAnalogy
 {
     public class SerialPortDataProviderSettings : UserSettingsFactory
     {

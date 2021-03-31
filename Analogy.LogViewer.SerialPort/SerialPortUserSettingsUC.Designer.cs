@@ -1,5 +1,5 @@
 ﻿
-namespace Analogy.LogViewer.gRPC
+namespace Analogy.LogViewer.SerialPort
 {
     partial class SerialPortUserSettingsUC
     {
@@ -33,6 +33,8 @@ namespace Analogy.LogViewer.gRPC
             this.label2 = new System.Windows.Forms.Label();
             this.txtbSerialPort = new System.Windows.Forms.TextBox();
             this.txtbSerialPortBaudrate = new System.Windows.Forms.TextBox();
+            this.txbRegex = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -60,7 +62,7 @@ namespace Analogy.LogViewer.gRPC
             this.txtbSerialPort.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtbSerialPort.Location = new System.Drawing.Point(326, 6);
-            this.txtbSerialPort.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtbSerialPort.Margin = new System.Windows.Forms.Padding(2);
             this.txtbSerialPort.Name = "txtbSerialPort";
             this.txtbSerialPort.Size = new System.Drawing.Size(389, 20);
             this.txtbSerialPort.TabIndex = 2;
@@ -71,24 +73,47 @@ namespace Analogy.LogViewer.gRPC
             this.txtbSerialPortBaudrate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtbSerialPortBaudrate.Location = new System.Drawing.Point(326, 28);
-            this.txtbSerialPortBaudrate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtbSerialPortBaudrate.Margin = new System.Windows.Forms.Padding(2);
             this.txtbSerialPortBaudrate.Name = "txtbSerialPortBaudrate";
             this.txtbSerialPortBaudrate.Size = new System.Drawing.Size(389, 20);
             this.txtbSerialPortBaudrate.TabIndex = 3;
             this.txtbSerialPortBaudrate.TextChanged += new System.EventHandler(this.txtbSelfHostingServerURL_TextChanged);
             // 
+            // txbRegex
+            // 
+            this.txbRegex.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txbRegex.Location = new System.Drawing.Point(326, 49);
+            this.txbRegex.Margin = new System.Windows.Forms.Padding(2);
+            this.txbRegex.Name = "txbRegex";
+            this.txbRegex.Size = new System.Drawing.Size(389, 20);
+            this.txbRegex.TabIndex = 4;
+            this.txbRegex.TextChanged += new System.EventHandler(this.txtbRegex);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(10, 49);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(41, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Regex:";
+            // 
             // SerialPortUserSettingsUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.txbRegex);
             this.Controls.Add(this.txtbSerialPortBaudrate);
             this.Controls.Add(this.txtbSerialPort);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "SerialPortUserSettingsUC";
             this.Size = new System.Drawing.Size(727, 243);
-            this.Load += new System.EventHandler(this.grpcUserSettingsUC_Load);
+            this.Load += new System.EventHandler(this.SerialPortUserSettingsUC_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -100,5 +125,7 @@ namespace Analogy.LogViewer.gRPC
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtbSerialPort;
         private System.Windows.Forms.TextBox txtbSerialPortBaudrate;
+        private System.Windows.Forms.TextBox txbRegex;
+        private System.Windows.Forms.Label label3;
     }
 }

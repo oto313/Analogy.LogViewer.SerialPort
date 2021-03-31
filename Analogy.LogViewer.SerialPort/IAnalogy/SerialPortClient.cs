@@ -1,14 +1,13 @@
-﻿using Analogy.Interfaces;
-using Analogy.LogViewer.gRPC.Managers;
-using Analogy.LogViewer.Template;
-using System;
-using System.IO.Ports;
-using System.Linq;
+﻿using System;
+using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Analogy.Interfaces;
+using Analogy.LogViewer.SerialPort.Managers;
+using Analogy.LogViewer.Template;
 
-namespace Analogy.LogViewer.gRPC.IAnalogy
+namespace Analogy.LogViewer.SerialPort.IAnalogy
 {
     public class SerialPortClient : OnlineDataProvider
     {
@@ -48,26 +47,36 @@ namespace Analogy.LogViewer.gRPC.IAnalogy
                         if (!_sp.IsOpen) {
                             _sp.Open();
                         }
-
+                        
                         var line = _sp.ReadLine().Trim();
                         if (token.IsCancellationRequested) {
                             return;
                         }
 
-                        var matches = Regex.Matches(line, @"^(?<time>\d*)\|(?<level>\w*)\|(?<file>[^:]*):(?<line>\d*)\|(?<text>.*)$");
+                        var matches = Regex.Matches(line, UserSettingsManager.UserSettings.Settings.Regex);
                         if (matches.Count != 1) {
                             continue;
                         }
-
+                        
                         
                         var match = matches[0];
+                        if (!match.Groups["level"].Success || !match.Groups["text"].Success) {
+                            continue;
+                        }
                         var levelString = match.Groups["level"].Value;
-                        AnalogyLogLevel level = levelString switch {
+                        var level = levelString switch {
+                            "CRT" => AnalogyLogLevel.Critical,
+                            "ERR" => AnalogyLogLevel.Error,
+                            "WRN" => AnalogyLogLevel.Warning,
                             "INF" => AnalogyLogLevel.Information,
                             "DBG" => AnalogyLogLevel.Debug,
                             "TRC" => AnalogyLogLevel.Trace,
-                            "ERR" => AnalogyLogLevel.Error,
-                            "WRN" => AnalogyLogLevel.Warning,
+                            "C" => AnalogyLogLevel.Critical,
+                            "E" => AnalogyLogLevel.Error,
+                            "W" => AnalogyLogLevel.Warning,
+                            "I" => AnalogyLogLevel.Information,
+                            "D" => AnalogyLogLevel.Debug,
+                            "T" => AnalogyLogLevel.Trace,
                             _ => AnalogyLogLevel.Unknown
                         };
 
@@ -79,14 +88,11 @@ namespace Analogy.LogViewer.gRPC.IAnalogy
                                     Level = level,
                                     Class = AnalogyLogClass.General,
                                     Date = DateTime.Now.ToLocalTime(),
-                                    FileName = match.Groups["file"].Value,
-                                    LineNumber = Convert.ToInt32(match.Groups["line"].Value),
-                                    MachineName = "",
-                                    MethodName = "",
-                                    //Module = m.Module,
-                                    Source = "Serial port",
+                                    FileName = match.Groups["file"].Success ? match.Groups["file"].Value : "",
+                                    LineNumber = match.Groups["line"].Success ? Convert.ToInt32(match.Groups["line"].Value) : 0,
+                                    Source = match.Groups["file"].Success ? match.Groups["file"].Value : "",
                                     Text = match.Groups["text"].Value,
-                                    //User = m.User
+                                    User = _sp.PortName
                                 },
                                 Environment.MachineName,
                                 OptionalTitle,
@@ -106,6 +112,7 @@ namespace Analogy.LogViewer.gRPC.IAnalogy
             Disconnected(this, new AnalogyDataSourceDisconnectedArgs("user disconnected", Environment.MachineName, Id));
             cts = new CancellationTokenSource();
             _sp?.Close();
+            _sp?.Dispose();
             return Task.CompletedTask;
         }
     }

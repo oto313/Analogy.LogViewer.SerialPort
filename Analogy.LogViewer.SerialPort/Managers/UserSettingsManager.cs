@@ -1,8 +1,8 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.IO;
+using Newtonsoft.Json;
 
-namespace Analogy.LogViewer.gRPC.Managers
+namespace Analogy.LogViewer.SerialPort.Managers
 {
     public class UserSettingsManager
     {
