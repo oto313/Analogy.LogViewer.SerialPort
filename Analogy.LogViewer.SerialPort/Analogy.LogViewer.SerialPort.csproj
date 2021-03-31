@@ -16,7 +16,7 @@
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
 		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
-		<Version>1.0.0</Version>
+		<Version>1.0.1</Version>
 		<Authors>Oto Dusek</Authors>
 		<OutputType>Library</OutputType>
 		<Description>Serial port Real Time Receiver for Analogy Log Viewer</Description>
@@ -39,6 +39,7 @@
 		<PackageReference Include="Analogy.LogServer.Clients" Version="0.5.6.2" />
 		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="2.12.5" />
 		<PackageReference Include="Analogy.LogViewer.Template" Version="1.8.3.2" />
+		<PackageReference Include="Grpc.Net.Client" Version="2.36.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0" />
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.10" />
 		<PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="3.1.10" />

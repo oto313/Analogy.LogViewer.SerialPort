@@ -31,10 +31,10 @@ namespace Analogy.LogViewer.SerialPort
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtbSerialPort = new System.Windows.Forms.TextBox();
             this.txtbSerialPortBaudrate = new System.Windows.Forms.TextBox();
             this.txbRegex = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.comboBoxSerialPort = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -56,17 +56,6 @@ namespace Analogy.LogViewer.SerialPort
             this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Baudrate:";
-            // 
-            // txtbSerialPort
-            // 
-            this.txtbSerialPort.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtbSerialPort.Location = new System.Drawing.Point(326, 6);
-            this.txtbSerialPort.Margin = new System.Windows.Forms.Padding(2);
-            this.txtbSerialPort.Name = "txtbSerialPort";
-            this.txtbSerialPort.Size = new System.Drawing.Size(389, 20);
-            this.txtbSerialPort.TabIndex = 2;
-            this.txtbSerialPort.TextChanged += new System.EventHandler(this.txtbRealTimeServerURL_TextChanged);
             // 
             // txtbSerialPortBaudrate
             // 
@@ -100,14 +89,23 @@ namespace Analogy.LogViewer.SerialPort
             this.label3.TabIndex = 5;
             this.label3.Text = "Regex:";
             // 
+            // comboBoxSerialPort
+            // 
+            this.comboBoxSerialPort.FormattingEnabled = true;
+            this.comboBoxSerialPort.Location = new System.Drawing.Point(326, 5);
+            this.comboBoxSerialPort.Name = "comboBoxSerialPort";
+            this.comboBoxSerialPort.Size = new System.Drawing.Size(389, 21);
+            this.comboBoxSerialPort.TabIndex = 6;
+            this.comboBoxSerialPort.SelectedIndexChanged += new System.EventHandler(this.spChanged);
+            // 
             // SerialPortUserSettingsUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.comboBoxSerialPort);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txbRegex);
             this.Controls.Add(this.txtbSerialPortBaudrate);
-            this.Controls.Add(this.txtbSerialPort);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -123,9 +121,9 @@ namespace Analogy.LogViewer.SerialPort
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtbSerialPort;
         private System.Windows.Forms.TextBox txtbSerialPortBaudrate;
         private System.Windows.Forms.TextBox txbRegex;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox comboBoxSerialPort;
     }
 }

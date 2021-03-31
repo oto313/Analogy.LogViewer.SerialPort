@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 using Analogy.LogViewer.SerialPort.Managers;
 
@@ -11,17 +12,13 @@ namespace Analogy.LogViewer.SerialPort
             InitializeComponent();
         }
 
-        private void SerialPortUserSettingsUC_Load(object sender, EventArgs e)
-        {
-            txtbSerialPort.Text = UserSettingsManager.UserSettings.Settings.SerialPort;
+        private void SerialPortUserSettingsUC_Load(object sender, EventArgs e) {
+            var ports = System.IO.Ports.SerialPort.GetPortNames();
+            comboBoxSerialPort.DataSource = ports;
+            var selectedPort = string.IsNullOrEmpty(UserSettingsManager.UserSettings.Settings.SerialPort) ? ports.FirstOrDefault() : UserSettingsManager.UserSettings.Settings.SerialPort;
+            comboBoxSerialPort.SelectedIndex = comboBoxSerialPort.FindStringExact(selectedPort);
             txtbSerialPortBaudrate.Text = UserSettingsManager.UserSettings.Settings.Baudrate.ToString();
-            txbRegex.Text = UserSettingsManager.UserSettings.Settings.Regex;
-        }
-
-        private void txtbRealTimeServerURL_TextChanged(object sender, EventArgs e)
-        {
-            UserSettingsManager.UserSettings.Settings.SerialPort = txtbSerialPort.Text;
-
+            txbRegex.Text = string.IsNullOrEmpty(UserSettingsManager.UserSettings.Settings.Regex) ? @"^(?<time>\d*)\|(?<level>\w*)\|(?<file>[^:]*):(?<line>\d*)\|(?<text>.*)$" : UserSettingsManager.UserSettings.Settings.Regex;
         }
 
         private void txtbSelfHostingServerURL_TextChanged(object sender, EventArgs e)
@@ -37,6 +34,11 @@ namespace Analogy.LogViewer.SerialPort
         {
             UserSettingsManager.UserSettings.Settings.Regex = txbRegex.Text;
 
+        }
+
+        private void spChanged(object sender, EventArgs e)
+        {
+            UserSettingsManager.UserSettings.Settings.SerialPort = comboBoxSerialPort.SelectedText;
         }
     }
 }
