@@ -37,10 +37,10 @@ jobs:
     # Buid the application 
     - name: Build the application
       run: | 
-        dotnet publish $env:Project_path --framework netcoreapp3.1 --runtime "${{ matrix.target }}" -c Release -o "$release_name"
-        7z a -tzip "netcoreapp3.1.zip" "./${release_name}/*"
+        dotnet publish $env:Project_path --framework netcoreapp3.1 --runtime "${{ matrix.target }}" -c Release -o tmp
+        7z a -tzip "netcoreapp3.1.zip" "./tmp/*"
         # Delete output directory
-        rm -r "$release_name"
+        rm -r tmp
         
     - name: Publish
       uses: softprops/action-gh-release@v1
