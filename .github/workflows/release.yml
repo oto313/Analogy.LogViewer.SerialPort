@@ -38,17 +38,13 @@ jobs:
     - name: Build the application
       run: | 
         dotnet publish $env:Project_path --framework netcoreapp3.1 --runtime "${{ matrix.target }}" -c Release -o "$release_name"
-        if [ "${{ matrix.target }}" == "win-x64" ]; then
-          7z a -tzip "netcoreapp3.1.zip" "./${release_name}/*"
-        else
-          tar czvf "netcoreapp3.1.tar.gz" "$release_name"
-        fi
+        7z a -tzip "netcoreapp3.1.zip" "./${release_name}/*"
         # Delete output directory
         rm -r "$release_name"
         
     - name: Publish
       uses: softprops/action-gh-release@v1
       with:
-        files: "App*"
+        files: "netcoreapp3.1.zip"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
