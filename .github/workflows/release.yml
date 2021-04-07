@@ -17,6 +17,19 @@ jobs:
           - kind: windows
             os: windows-latest
             target: win-x64
+            framework: netcoreapp3.1
+          - kind: windows
+            os: windows-latest
+            target: win-x64
+            framework: net48
+          - kind: windows
+            os: windows-latest
+            target: win-x64
+            framework: net472
+          - kind: windows
+            os: windows-latest
+            target: win-x64
+            framework: net471
     runs-on: ${{ matrix.os }}
     env:
       Project_path:  Analogy.LogViewer.SerialPort/Analogy.LogViewer.SerialPort.csproj     
@@ -37,14 +50,14 @@ jobs:
     # Buid the application 
     - name: Build the application
       run: | 
-        dotnet publish $env:Project_path --framework netcoreapp3.1 --runtime "${{ matrix.target }}" -c Release -o tmp
-        7z a -tzip "netcoreapp3.1.zip" "./tmp/*"
+        dotnet publish $env:Project_path --framework "${{ matrix.framework }}" --runtime "${{ matrix.target }}" -c Release -o tmp
+        7z a -tzip "${{ matrix.framework }}.zip" "./tmp/*"
         # Delete output directory
         rm -r tmp
         
     - name: Publish
       uses: softprops/action-gh-release@v1
       with:
-        files: "netcoreapp3.1.zip"
+        files: "${{ matrix.framework }}.zip"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
