@@ -13,7 +13,6 @@ jobs:
     strategy:
       matrix:
         os: ['windows-latest']
-        target: ['win-x64']
         framework: ['netcoreapp3.1', 'net48', 'net472', 'net471']
     runs-on: ${{ matrix.os }}
     env:
@@ -35,7 +34,7 @@ jobs:
     # Buid the application 
     - name: Build the application
       run: | 
-        dotnet publish $env:Project_path --framework "${{ matrix.framework }}" --runtime "${{ matrix.target }}" -c Release -o tmp
+        dotnet publish $env:Project_path --framework "${{ matrix.framework }}" -c Release -o tmp
         7z a -tzip "${{ matrix.framework }}.zip" "./tmp/*"
         # Delete output directory
         rm -r tmp
