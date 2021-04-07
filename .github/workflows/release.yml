@@ -12,24 +12,9 @@ jobs:
     # The type of runner that the job will run on
     strategy:
       matrix:
-        kind: ['windows']
-        include:
-          - kind: windows
-            os: windows-latest
-            target: win-x64
-            framework: netcoreapp3.1
-          - kind: windows
-            os: windows-latest
-            target: win-x64
-            framework: net48
-          - kind: windows
-            os: windows-latest
-            target: win-x64
-            framework: net472
-          - kind: windows
-            os: windows-latest
-            target: win-x64
-            framework: net471
+        os: ['windows']
+        target: ['win-x64']
+        framework: ['netcoreapp3.1', 'net48', 'net472', 'net471']
     runs-on: ${{ matrix.os }}
     env:
       Project_path:  Analogy.LogViewer.SerialPort/Analogy.LogViewer.SerialPort.csproj     
